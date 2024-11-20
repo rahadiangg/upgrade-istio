@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-ingressgateway-1-18-7 # you can name it same with the revision
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+      app: istio-ingressgateway
+  template:
+    metadata:
+      annotations:
+        inject.istio.io/templates: gateway # you can name it same with the revision
+      labels:
+        istio: ingressgateway
+        app: istio-ingressgateway
+        istio.io/rev: 1-18-7 # Set to the istio revision that you want to use
+    spec:
+      containers:
+      - name: istio-proxy
+        image: auto
